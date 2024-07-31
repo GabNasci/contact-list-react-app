@@ -3,9 +3,13 @@ import { Contact } from "./model/Contact";
 import ContactController from "./controller/ContactController";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import InputMask from "react-input-mask"
+import { InputMask } from 'primereact/inputmask';
+import { useState } from "react";
+        
 
 function App() {
+
+  const [value, setValue] = useState<string | undefined>("");
 
   const { register, handleSubmit, formState: { errors } } = useForm<Contact>({
     resolver: zodResolver(contactSchema)
@@ -31,7 +35,13 @@ function App() {
           <div className="flex flex-col gap-1">
             <label htmlFor="phone">Phone: <span className=" text-red-600">*</span></label>
             
-            <InputMask className="border border-black rounded-md p-1 w-96" {...register('phone')} id="phone" mask="(99) 99999-9999" placeholder="(DDD)XXXXX-XXXX" />
+            <InputMask 
+              className="border border-black rounded-md p-1 w-96" 
+              value={value} 
+              onChange={(e) => setValue(e.target.value as string)} 
+              mask="(99) 99999-9999" 
+              placeholder="(99) 99999-9999"
+            />
             {errors.phone && <p className="text-red-600 text-sm">{errors.phone.message}</p>}
           </div>
           <div className="flex flex-col gap-1">
