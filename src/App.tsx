@@ -1,5 +1,5 @@
 import { contactSchema } from "./schema/contactSchema";
-import { ContactDTO } from "./interfaces/ContactDTO";
+import { Contact } from "./model/Contact";
 import ContactController from "./controller/ContactController";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -7,14 +7,13 @@ import InputMask from "react-input-mask"
 
 function App() {
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ContactDTO>({
+  const { register, handleSubmit, formState: { errors } } = useForm<Contact>({
     resolver: zodResolver(contactSchema)
   })
 
 
-  const handleForm = (data: ContactDTO) => {
+  const handleForm = (data: Contact) => {
     ContactController.createContact(data)
-    console.log(ContactController.getContacts())
   }
 
   return (
