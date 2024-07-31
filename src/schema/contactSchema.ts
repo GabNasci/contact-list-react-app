@@ -1,0 +1,11 @@
+import { z } from "zod"
+
+const phoneRegex: RegExp = /^\(\d{2}\) \d{5}-\d{4}$/
+
+export const contactSchema = z.object({
+    name: z.string(),
+    phone: z.string().regex(phoneRegex, {message: "must be (DDD)XXXXX-XXXX"}),
+    email: z.string().email(),
+    address: z.string(),
+    note: z.string()
+  })
