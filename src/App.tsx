@@ -13,8 +13,16 @@ function App() {
 
 
   const handleForm = (data: ContactDTO) => {
-    ContactController.createContact(data)
-    console.log(ContactController.getContacts())
+    ContactController.updateContact({
+      id: 2, 
+      name: data.name, 
+      phone: data.phone, 
+      email: data.email, 
+      address: data.address, 
+      note: data.note,
+      type: "Professional"
+    })
+    console.log(ContactController.getAllContacts())
   }
 
   return (
