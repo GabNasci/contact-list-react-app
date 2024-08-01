@@ -4,20 +4,24 @@ import ContactController from "../controller/ContactController";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { InputMask } from 'primereact/inputmask';
+import { ContactContext } from "./Context";
+import { useContext } from "react";
 
 
 function CreateContactForm() {
 
     const { control, register, handleSubmit, formState: { errors } } = useForm<Contact>({
         resolver: zodResolver(contactSchema)
-      })
-    
-    
-      const handleForm = (data: Contact) => {
+    })
+
+    const { contacts, handleContacts } = useContext(ContactContext);
+
+
+
+    const handleForm = (data: Contact) => {
         ContactController.createContact(data)
-        console.log(ContactController.getAllContacts())
-        
-      }
+        handleContacts(ContactController.getAllContacts())
+    }
 
     return (
         <form className="flex flex-col items-center gap-2 bg-white rounded-lg p-4" autoComplete="off" onSubmit={handleSubmit(handleForm)} >
