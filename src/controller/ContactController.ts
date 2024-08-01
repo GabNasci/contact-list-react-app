@@ -6,7 +6,6 @@ let contacts: Array<Contact> = [
     { id: 3, name: "John Doe3", phone: "(99) 99999-9999", email: "john@example.com", address: "123 Main St", note: "Friend", type: "Personal"}
 ]
 
-const lastIndex = contacts.length + 1
 
 function getAllContacts(): Array<Contact> {
     return contacts
@@ -34,7 +33,7 @@ function getContactByEmail(contactEmail: string): Array<Contact | undefined> {
 
 function createContact(contact: Contact): void {
     contacts.push({
-        id: lastIndex, 
+        id: contacts.length + 1, 
         name: contact.name, 
         phone: contact.phone, 
         email: contact.email, 
